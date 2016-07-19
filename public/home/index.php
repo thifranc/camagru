@@ -28,6 +28,10 @@ if ($_GET['action'])
 		}
 		if ($_GET['action'] === 'confirm' && isset($_GET['login']) && isset($_GET['link'])) 
 			confirm($_GET['login'], $_GET['link']);
+		if ($_GET['action'] === 'forgot' && isset($_POST['login']))
+			forgot_passwd($_POST['login']);
+		if ($_GET['action'] === 'reset' && isset($_GET['login']) && isset($_GET['uniq']))
+			reset_passwd($_GET['login'], $_GET['uniq']);
 	}
 	if ($_SESSION['log_id'])
 	{
@@ -39,8 +43,6 @@ if ($_GET['action'])
 			else
 				echo 'Success';
 		}
-		if ($_GET['action'] === 'forgot')
-			forgot_paswd($_SESSION['log_id']);
 	}
 }
 
