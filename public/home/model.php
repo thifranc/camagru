@@ -1,20 +1,35 @@
 <?PHP
 
+include '/nfs/2015/t/thifranc/http/MyWebSite/private/database.php';
+
+function connect()
+{
+	try {
+		$bdd = new PDO('mysql:host=localhost;dbname=thug_cam', 'root', 'root');
+		$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		return ($bdd);
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage();
+		die();
+	}
+}
+
 function register($login, $passwd, $mail)
 {
-	$passwd = hash('whirpool', $passwd);
+	$bdd = connect();
+	$passwd = hash('whirlpool', $passwd);
 	$query = $bdd->prepare('INSERT INTO user(login, passwd, mail)
 		VALUES (:login, :passwd, :mail)');
 	$query->bindParam(':login', $login);
 	$query->bindParam(':passwd', $passwd);
 	$query->bindParam(':mail', $mail);
 	$query->execute();
-	//penser a envoyer un mail
+	mail($mail, 'Confirm register', 'Click on this link to complete your registration : localhost:8080/public/home/index.php?action=confirm&login='. $login.'&link='. substr($passwd, 0, 20) . PHP_EOL);
 }
 
 function login($login, $passwd)
 {
-	$passwd = hash('whirpool', $passwd);
+	$passwd = hash('whirlpool', $passwd);
 	$query = $bdd->prepare('SELECT * FROM user WHERE login=:login AND passwd=:passwd AND active = 1 LIMIT 1');
 	$query->bindParam(':login', $login);
 	$query->bindParam(':passwd', $passwd);
@@ -71,10 +86,10 @@ function forgot_passwd($login)
 		$unique = uniqid();
 		$query->bindParam(':passwd', $unique);
 		$query->bindParam(':id', $result['id']);
+		mail($result['mail'], 'Reset your password', 'Hi ! Click on this link to reset your password ! : localhost:8080/public/home/index.php?action=reset&login='.$result['login'].'&uniq='.$unique . PHP_EOL);
 	}
 	else
 		return FALSE;
-	mail($result['mail'], 'Reset your password', 'Hi ! Click on this link to reset your password ! : localhost:8080/public/home/index.php?action=reset&login='.$result['login'].'&uniq='.$unique . PHP_EOL);
 }
 
 function reset_passwd($login, $unique_id)
@@ -86,13 +101,12 @@ function reset_passwd($login, $unique_id)
 	$result = $query->fetch();
 	if ($result !== FALSE)
 	{
-		$passwd_cutted = substr($result['passwd'], 0, 20);
-		$query = $bdd->prepare('UPDATE user SET passwd=:passwd_cutted WHERE id=:id');
-		$query->bindParam(':passwd', $passwd_cutted);
+		$query = $bdd->prepare('UPDATE user SET passwd=:unique_id WHERE id=:id');
+		$query->bindParam(':unique_id', $unique_id);
 		$query->bindParam(':id', $result['id']);
 		$query->execute();
+		mail($result['mail'], 'Your new password', 'Hi ! You have successfully reseted your password ! Your new password is now '. $unique_id . PHP_EOL);
 	}
 	else
 		return FALSE;
-	//mail avec your new passwd is $passwd_cutted.
 }
