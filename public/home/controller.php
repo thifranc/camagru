@@ -2,11 +2,6 @@
 
 session_start();
 
-if (isset($_SESSION['log_id']))
-{
-//	$_SESSION = array();
-}
-
 require_once('model.php');
 
 //pour communiquer les retours de fonctions a la view, set des $var > return error, puis view les interpretera
@@ -73,6 +68,7 @@ if (isset($_GET['action']))
 	}
 	else
 	{
+		print_r($_SESSION);
 		print_r($_GET);
 		print_r($_POST);
 		if ($_GET['action'] === 'update' && isset($_POST['login']) && isset($_POST['old_passwd']) && isset($_POST['new_passwd']))
@@ -83,6 +79,8 @@ if (isset($_GET['action']))
 			else
 				echo 'Password changed with succes !';
 		}
+		else if ($_GET['action'] === 'logout')
+			$_SESSION = array();
 	}
 }
 
