@@ -21,7 +21,7 @@
 						echo '<form method="post" action="controller.php?action=logout">';
 						echo '<input type="submit" name="logout" value="Logout">';
 						echo '</form>';
-						echo '<a href=../public/cam>Go be a thug</a>';
+						echo '<a href=../cam>Go be a thug</a>';
 					}
 				?>
 			
