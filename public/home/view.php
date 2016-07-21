@@ -16,7 +16,10 @@
 						display_forgot();
 					}
 					else
+					{
+						display_update();
 						echo '<a href=../public/cam>Go be a thug</a>';
+					}
 				?>
 			
 			</article>
@@ -33,6 +36,7 @@
 </html>
 
 <?PHP
+
 function display_register()
 {
 	echo ('Register
@@ -66,5 +70,16 @@ function display_forgot()
 		');
 }
 
+function display_update()
+{
+	echo ('Change your password ?
+		<form method="post" action="controller.php?action=update">
+			Login : <input type="text" name="login">
+			Old password : <input type="password" name="old_passwd">
+			New password : <input type="password" name="new_passwd">
+			<input type="submit" name="OK" value="OK">
+		</form>
+		');
+}
 
 ?>

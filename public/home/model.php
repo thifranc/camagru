@@ -75,28 +75,35 @@ function confirm($login, $link)
 
 function update($login, $old_passwd, $new_passwd)
 {
+	if (strlen($new_passwd) < 8)
+		return FALSE;
+	try {
 	$bdd = connect();
-	$query = $bdd->prepare('SELECT * FROM user WHERE login=:login AND passwd=:old_passwd LIMIT 1');
+	$query = $bdd->prepare('SELECT * FROM user WHERE login=:login AND passwd=:old_passwd AND active=1 LIMIT 1');
 	$query->bindParam(':login', $login);
-	$query->bindParam(':passwd', $old_passwd);
+	$query->bindParam(':old_passwd', hash('whirlpool', $old_passwd));
 	$query->execute();
 	$result = $query->fetch();
 	if ($result !== FALSE)
 	{
 		$query = $bdd->prepare('UPDATE user SET passwd=:new_passwd WHERE id=:id');
-		$query->bindParam(':new_passwd', $new_passwd);
+		$query->bindParam(':new_passwd', hash('whirlpool', $new_passwd));
 		$query->bindParam(':id', $result['id']);
 		$query->execute();
 	}
 	else
 		return FALSE;
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage();
+		return FALSE;
+	}
 }
 
 function forgot_passwd($login)
 {
 	try {
 	$bdd = connect();
-	$query = $bdd->prepare('SELECT * FROM user WHERE login=:login LIMIT 1');
+	$query = $bdd->prepare('SELECT * FROM user WHERE login=:login AND active=1 LIMIT 1');
 	$query->bindParam(':login', $login);
 	$query->execute();
 	$result = $query->fetch();
@@ -122,7 +129,7 @@ function reset_passwd($login, $unique_id)
 {
 	try {
 	$bdd = connect();
-	$query = $bdd->prepare('SELECT * FROM user WHERE login=:login AND tmp_passwd=:unique_id LIMIT 1');
+	$query = $bdd->prepare('SELECT * FROM user WHERE login=:login AND tmp_passwd=:unique_id AND active=1 LIMIT 1');
 	$query->bindParam(':login', $login);
 	$query->bindParam(':unique_id', $unique_id);
 	$query->execute();
