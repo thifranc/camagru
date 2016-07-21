@@ -42,7 +42,7 @@ function login($login, $passwd)
 		$query->bindParam(':passwd', $passwd);
 		$query->execute();
 		if ($query->rowCount() === 1)
-			return ($query->fetch()['id']);
+			return ($query->fetch()['user_id']);
 		else
 			return FALSE;
 	} catch (PDOException $e) {
@@ -61,8 +61,8 @@ function confirm($login, $link)
 		$result = $query->fetch();
 		if (strncmp($link, $result['passwd'], 20) == 0)
 		{
-			$query = $bdd->prepare('UPDATE user SET active=1 WHERE id=:id');
-			$query->bindParam(':id', $result['id']);
+			$query = $bdd->prepare('UPDATE user SET active=1 WHERE user_id=:user_id');
+			$query->bindParam(':user_id', $result['user_id']);
 			$query->execute();
 		}
 		else
@@ -86,9 +86,9 @@ function update($login, $old_passwd, $new_passwd)
 		$result = $query->fetch();
 		if ($result !== FALSE)
 		{
-			$query = $bdd->prepare('UPDATE user SET passwd=:new_passwd WHERE id=:id');
+			$query = $bdd->prepare('UPDATE user SET passwd=:new_passwd WHERE user_id=:user_id');
 			$query->bindParam(':new_passwd', hash('whirlpool', $new_passwd));
-			$query->bindParam(':id', $result['id']);
+			$query->bindParam(':user_id', $result['user_id']);
 			$query->execute();
 		}
 		else
@@ -111,9 +111,9 @@ function forgot_passwd($login)
 		if ($result !== FALSE)
 		{
 			$unique = uniqid();
-			$query = $bdd->prepare('UPDATE user SET tmp_passwd=:unique WHERE id=:id');
+			$query = $bdd->prepare('UPDATE user SET tmp_passwd=:unique WHERE user_id=:user_id');
 			$query->bindParam(':unique', $unique);
-			$query->bindParam(':id', $result['id']);
+			$query->bindParam(':user_id', $result['user_id']);
 			$query->execute();
 			mail($result['mail'], 'Reset your password', 'Hi ! Click on this link to reset your password ! : localhost:8080/public/home/controller.php?action=reset&login='.$login.'&uniq='.$unique . PHP_EOL);
 		}
@@ -136,9 +136,9 @@ function reset_passwd($login, $unique_id)
 		$result = $query->fetch();
 		if ($result !== FALSE)
 		{
-			$query = $bdd->prepare('UPDATE user SET tmp_passwd=NULL,passwd=:hash_passwd WHERE id=:id');
+			$query = $bdd->prepare('UPDATE user SET tmp_passwd=NULL,passwd=:hash_passwd WHERE user_id=:user_id');
 			$query->bindParam(':hash_passwd', hash('whirlpool', $unique_id));
-			$query->bindParam(':id', $result['id']);
+			$query->bindParam(':user_id', $result['user_id']);
 			$query->execute();
 			mail($result['mail'], 'Your new password', 'Hi ! You have successfully reseted your password ! Your new password is now '. $unique_id . PHP_EOL);
 		}
