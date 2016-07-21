@@ -1,5 +1,12 @@
 <?PHP
 
+session_start();
+
+if (isset($_SESSION['log_id']))
+{
+	$_SESSION = array();
+}
+
 require_once('model.php');
 
 //pour communiquer les retours de fonctions a la view, set des $var > return error, puis view les interpretera
@@ -14,7 +21,7 @@ if (isset($_GET['action']))
 			if (filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL) && strlen($_POST['passwd']) >= 8)
 			{
 				$registered = register($_POST['login'], $_POST['passwd'], $_POST['mail']);
-				if ($register === FALSE)
+				if ($registered === FALSE)
 					echo 'mail or login already used, please choose another one';
 				else
 					echo 'A confirmation mail has been sent to you';
@@ -31,11 +38,29 @@ if (isset($_GET['action']))
 				$_SESSION['log_id'] = $logged;
 		}
 		if ($_GET['action'] === 'confirm' && isset($_GET['login']) && isset($_GET['link'])) 
-			confirm($_GET['login'], $_GET['link']);
+		{
+			$confirmed = confirm($_GET['login'], $_GET['link']);
+			if ($confirmed === FALSE)
+				echo 'The confirmation failed';
+			else
+				echo 'You created your account and confirmed it ! Congratulations !';
+		}
 		if ($_GET['action'] === 'forgot' && isset($_POST['forgot_login']))
-			forgot_passwd($_POST['forgot_login']);
+		{
+			$forgot = forgot_passwd($_POST['forgot_login']);
+			if ($forgot === FALSE)
+				echo 'The login is not correct';
+			else
+				echo 'An email has been sent to you to reset your password';
+		}
 		if ($_GET['action'] === 'reset' && isset($_GET['login']) && isset($_GET['uniq']))
-			reset_passwd($_GET['login'], $_GET['uniq']);
+		{
+			$reset = reset_passwd($_GET['login'], $_GET['uniq']);
+			if ($reset === FALSE)
+				echo 'The password could not be reseted';
+			else
+				echo 'An email with your new password has been sent';
+		}
 	}
 	if ($_SESSION['log_id'])
 	{

@@ -16,14 +16,19 @@
 						display_forgot();
 					}
 					else
-						display_update();
+						echo '<a href=../public/cam>Go be a thug</a>';
 				?>
 			
 			</article>
 			<aside>aside</aside>
 		</div>
 
-		<footer>Developped by Thifranc compagny</footer>
+		<footer>
+			<?PHP
+				if (isset($_SESSION['log_id']))
+					echo ('Passwrd');
+			?>
+		</footer>
 	</body>
 </html>
 
@@ -60,4 +65,6 @@ function display_forgot()
 		</form>
 		');
 }
+
+
 ?>
