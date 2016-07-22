@@ -1,5 +1,7 @@
 <?PHP
 
+//test a faire : print_r un empty set returned by la db
+
 function connect()
 {
 	try {
@@ -33,7 +35,7 @@ function get_owner($img_id)
 {
 	try {
 		$bdd = connect();
-		$query = $bdd->prepare('SELECT login FROM img JOIN user ON user_id WHERE img_id=:img_id LIMIT 1');
+		$query = $bdd->prepare('SELECT login FROM img JOIN user ON img.user_id WHERE img_id=:img_id LIMIT 1');
 		$query->bindParam(':img_id', $img_id);
 		$query->execute();
 		if ($query->rowCount() === 1)
@@ -49,6 +51,17 @@ function get_owner($img_id)
 
 function get_comm($img_id)
 {
+	try {
+		$bdd = connect(); // don't forget to order by date (+ recent au + vieux)
+		$query = $bdd->prepare('SELECT text, user_id, date FROM img JOIN comment ON img.img_id WHERE img_id=:img_id');
+		$query->bindParam(':img_id', $img_id);
+		$query->execute();
+		return ($query->fetchAll());
+											//be sure that can't return empty set
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage();
+		return FALSE;
+	}
 	//do join sql table comment and img
 }
 
@@ -60,7 +73,8 @@ function get_page($page_num, $elem_by_pg)
 		$query->bindParam(':beg', $page_num * $elem_by_pg);
 		$query->bindParam(':length', $elem_by_pg);
 		$query->execute();
-		return $query->fetchAll();				//be sure that can't return empty set
+		return $query->fetchAll();
+											//be sure that can't return empty set
 	} catch (PDOException $e) {
 		echo 'Connection failed: ' . $e->getMessage();
 		return FALSE;
