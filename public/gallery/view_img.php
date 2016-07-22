@@ -9,7 +9,10 @@
 		<div class="wrapper">
 			<article>
 				<?PHP
-					
+					echo '<img src='.$img['link'].'>';
+					echo 'owner is' . $owner . PHP_EOL;
+					//display_like();
+					display_comment($comment);
 				?>
 			</article>
 			<aside>aside</aside>
@@ -20,14 +23,10 @@
 </html>
 
 <?PHP
-	function display_page_number($sum_img, $elem_by_pg)
-	{
-		$nb_page = ceil($sum_img / $elem_by_pg);
-		$i = 0;
-		while ($i < $nb_page)
-		{
-			echo '<a href="controller.php?display=page&p="'.$i.'> '.$i. ' </a>';
-			$i++;
-		}
-	}
+
+function display_comment($comment)
+{
+	//see comment in view_page.php on removing img
+}
+
 ?>
