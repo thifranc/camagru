@@ -69,10 +69,9 @@ function get_page($page_num, $elem_by_pg)
 {
 	try {
 		$bdd = connect();
-		$query = $bdd->prepare('SELECT * FROM img LIMIT :beg, :length');
 		$beg = $page_num * $elem_by_pg;
-		$query->bindParam(':beg', $beg);
-		$query->bindParam(':length', $elem_by_pg);
+		$command = 'SELECT * FROM img LIMIT '.$beg.','.$elem_by_pg;
+		$query = $bdd->prepare($command);
 		$query->execute();
 		return $query->fetchAll();
 											//be sure that can't return empty set
