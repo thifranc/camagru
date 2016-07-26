@@ -2,6 +2,9 @@
 
 session_start();
 
+if (!isset($_SESSION['log_id']))
+	header ("Location: ../home/controller.php");
+
 require_once("model.php");
 
 if (isset($_GET['display']) && $_GET['display'] === 'img' && isset($_GET['img_id']))
