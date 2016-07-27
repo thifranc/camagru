@@ -15,6 +15,10 @@ body {
   padding: 1em;
 }
 
+.boxed {
+	border: 1px solid blue;
+}
+
 .wrapper {
   flex: 1 1 auto; /* occupe la hauteur restante */
   display: flex; /* crée un contexte flex pour ses enfants */

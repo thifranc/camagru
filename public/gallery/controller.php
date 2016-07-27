@@ -1,5 +1,7 @@
 <?PHP
 
+//si retour de fetchAll vides -> test avec empty function
+
 session_start();
 
 if (!isset($_SESSION['log_id']))
@@ -18,6 +20,5 @@ else
 {
 	$img_data = get_page($_GET['p'], 5);
 	$sum_img = sum_img();
-	//epurer img_data pour pas avoir de doublons, cf fetchAll retourne 2 index pour chaque elem
 	require_once("view_page.php");
 }
