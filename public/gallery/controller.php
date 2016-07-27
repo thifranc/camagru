@@ -4,9 +4,6 @@
 
 session_start();
 
-if (!isset($_SESSION['log_id']))
-	header ("Location: ../home/controller.php");
-
 require_once("model.php");
 
 if (isset($_GET['display']) && $_GET['display'] === 'img' && isset($_GET['img_id']))
@@ -16,9 +13,14 @@ if (isset($_GET['display']) && $_GET['display'] === 'img' && isset($_GET['img_id
 	$comment = get_comm($_GET['img_id']);
 	require_once("view_img.php");
 }
+else if (isset($_SESSION['log_id']) && isset($_GET['action']) && isset($_GET['img_id']) && $_GET['action'] === 'add_comm' && !empty($_POST['text']))
+{
+	add_comm($_GET['img_id'], $_POST['text']);
+	$header = 'Location: ../gallery/controller.php?display=img&img_id='.$_GET['img_id'];
+	header ($header);
+}
 else
 {
-	echo date('Y-M-D h:m:s');
 	$img_data = get_page($_GET['p'], 5);
 	$sum_img = sum_img();
 	require_once("view_page.php");

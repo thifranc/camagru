@@ -1,7 +1,5 @@
 <?PHP
 
-//test a faire : print_r un empty set returned by la db
-
 function connect()
 {
 	try {
@@ -35,7 +33,7 @@ function get_owner($img_id)
 {
 	try {
 		$bdd = connect();
-		$query = $bdd->prepare('SELECT login FROM img JOIN user ON img.user_id WHERE img_id=:img_id LIMIT 1');
+		$query = $bdd->prepare('SELECT login FROM img JOIN user ON img.user_id=user.user_id WHERE img_id=:img_id LIMIT 1');
 		$query->bindParam(':img_id', $img_id);
 		$query->execute();
 		if ($query->rowCount() === 1)
@@ -47,6 +45,7 @@ function get_owner($img_id)
 		return FALSE;
 	}
 }
+
 function get_login($user_id)
 {
 	try {
@@ -68,7 +67,7 @@ function get_comm($img_id)
 {
 	try {
 		$bdd = connect(); // don't forget to order by date (+ recent au + vieux)
-		$query = $bdd->prepare('SELECT text, img.user_id, date FROM img JOIN comment ON img.img_id WHERE comment.img_id=:img_id AND img.img_id=:img_id');
+		$query = $bdd->prepare('SELECT text, comment.user_id, date FROM comment JOIN user ON comment.user_id=user.user_id WHERE img_id=:img_id ORDER by date');
 		$query->bindParam(':img_id', $img_id);
 		$query->execute();
 		return ($query->fetchAll());
@@ -83,10 +82,9 @@ function add_comm($img_id, $text)
 	try {
 		$bdd = connect();
 		$query = $bdd->prepare('INSERT INTO comment (img_id, user_id, date, text)
-			VALUES (:img_id, :user_id, :date, :text)');
+			VALUES (:img_id, :user_id, NOW(), :text)');
 		$query->bindParam(':img_id', $img_id);
 		$query->bindParam(':user_id', $_SESSION['log_id']);
-		$query->bindParam(':date', date());
 		$query->bindParam(':text', $text);
 		$query->execute();
 	} catch (PDOException $e) {
