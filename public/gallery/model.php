@@ -78,6 +78,23 @@ function get_comm($img_id)
 	}
 }
 
+function add_comm($img_id, $text)
+{
+	try {
+		$bdd = connect();
+		$query = $bdd->prepare('INSERT INTO comment (img_id, user_id, date, text)
+			VALUES (:img_id, :user_id, :date, :text)');
+		$query->bindParam(':img_id', $img_id);
+		$query->bindParam(':user_id', $_SESSION['log_id']);
+		$query->bindParam(':date', date());
+		$query->bindParam(':text', $text);
+		$query->execute();
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage();
+		return FALSE;
+	}
+}
+
 function get_page($page_num, $elem_by_pg)
 {
 	try {

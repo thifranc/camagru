@@ -18,6 +18,7 @@ if (isset($_GET['display']) && $_GET['display'] === 'img' && isset($_GET['img_id
 }
 else
 {
+	echo date('Y-M-D h:m:s');
 	$img_data = get_page($_GET['p'], 5);
 	$sum_img = sum_img();
 	require_once("view_page.php");
