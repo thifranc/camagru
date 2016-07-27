@@ -1,7 +1,5 @@
 <?PHP
 
-//si retour de fetchAll vides -> test avec empty function
-
 session_start();
 
 require_once("model.php");
@@ -10,6 +8,8 @@ if (isset($_GET['display']) && $_GET['display'] === 'img' && isset($_GET['img_id
 {
 	$img = get_img($_GET['img_id']);
 	$owner = get_owner($_GET['img_id']);
+	if (empty($img) || empty($owner))
+		header ('Location: ../gallery/controller.php');
 	$comment = get_comm($_GET['img_id']);
 	require_once("view_img.php");
 }
@@ -21,7 +21,11 @@ else if (isset($_SESSION['log_id']) && isset($_GET['action']) && isset($_GET['im
 }
 else
 {
-	$img_data = get_page($_GET['p'], 5);
+	$elem_by_pg = 5;
+	$img_data = get_page($_GET['p'], $elem_by_pg);
 	$sum_img = sum_img();
+	$nb_page = ceil($sum_img / $elem_by_pg);
+	if ($_GET['p'] > $nb_page)
+		header ('Location: ../gallery/controller.php');
 	require_once("view_page.php");
 }

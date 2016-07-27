@@ -10,7 +10,7 @@
 			<article>
 				<?PHP
 					display_page_img($img_data);
-					display_page_number($sum_img, 5);
+					display_page_number($sum_img, $elem_by_pg, $nb_page);
 				?>
 			</article>
 			<aside>aside</aside>
@@ -19,7 +19,6 @@
 		<footer>footer</footer>
 	</body>
 </html>
-
 
 <?PHP
 
@@ -36,7 +35,7 @@
 		}
 	}
 
-	function display_page_number($sum_img, $elem_by_pg)
+	function display_page_number($sum_img, $elem_by_pg, $nb_page)
 	{
 		$nb_page = ceil($sum_img / $elem_by_pg);
 		$i = 0;
