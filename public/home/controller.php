@@ -8,7 +8,6 @@ require_once('model.php');
 
 if (isset($_GET['action']))
 {
-	print_r($_POST);
 	if (!isset($_SESSION['log_id']))
 	{
 		if ($_GET['action'] === 'register'
@@ -68,9 +67,6 @@ if (isset($_GET['action']))
 	}
 	else
 	{
-		print_r($_SESSION);
-		print_r($_GET);
-		print_r($_POST);
 		if ($_GET['action'] === 'update' && isset($_POST['login']) && isset($_POST['old_passwd']) && isset($_POST['new_passwd']))
 		{
 			$updated = update($_POST['login'], $_POST['old_passwd'], $_POST['new_passwd']);

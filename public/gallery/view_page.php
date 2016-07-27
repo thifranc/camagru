@@ -14,7 +14,7 @@
 				?>
 			</article>
 			<aside>aside</aside>
-		</div> <!-- /wrapper -->
+		</div>
 
 		<footer>footer</footer>
 	</body>
@@ -23,12 +23,13 @@
 
 <?PHP
 
-//pour remove page : onclick : if SESSION(log_id) == imgclicked['user_id'] => then js remove 
+//pour remove img : onclick : if SESSION(log_id) == imgclicked['user_id'] => then js remove 
+	//<div id=img_di>lololol</div>
+	//ducoup getelembyid => remove elem
 //les img seront ds des div, avec chacune une id correspondante a img_id (donc unique) donc removable facilement en js
 
 	function display_page_img($img_data)
 	{
-		//attention il faut pas de doublons, la on est parti pour en avoir cf fetchAll return
 		foreach ($img_data as $img)
 		{
 			echo '<a href="controller.php?display=img&img_id='.$img['img_id'].'"><img src='.$img['link'].'></a>';
