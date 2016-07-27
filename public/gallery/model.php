@@ -68,12 +68,12 @@ function get_comm($img_id)
 {
 	try {
 		$bdd = connect(); // don't forget to order by date (+ recent au + vieux)
-		$query = $bdd->prepare('SELECT text, img.user_id, date FROM img JOIN comment ON img.img_id WHERE img.img_id=:img_id');
+		$query = $bdd->prepare('SELECT text, img.user_id, date FROM img JOIN comment ON img.img_id WHERE comment.img_id=:img_id AND img.img_id=:img_id');
 		$query->bindParam(':img_id', $img_id);
 		$query->execute();
 		return ($query->fetchAll());
 	} catch (PDOException $e) {
-		echo 'niktarass Connection failed: ' . $e->getMessage();
+		echo 'Connection failed: ' . $e->getMessage();
 		return FALSE;
 	}
 }
