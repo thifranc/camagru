@@ -12,6 +12,19 @@ function connect()
 	}
 }
 
+function delete_img($img_id)
+{
+	try {
+		$bdd = connect();
+		$query = $bdd->prepare('DELETE FROM img WHERE img_id=:img_id LIMIT 1');
+		$query->bindParam(':img_id', $img_id);
+		$query->execute();
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage();
+		return FALSE;
+	}
+}
+
 function get_img($img_id)
 {
 	try {

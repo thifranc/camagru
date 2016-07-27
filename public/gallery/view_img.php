@@ -12,7 +12,11 @@
 				<?PHP
 					display_comment($comment);
 					if (isset($_SESSION['log_id']))
+					{
 						insert_comm($img);
+						if ($_SESSION['log_id'] === $img['user_id'])
+							echo '<a href=controller.php?action=remove&img_id='.$img['img_id'].'>Delete this image</a>';
+					}
 				?>
 			</article>
 			<aside>aside</aside>

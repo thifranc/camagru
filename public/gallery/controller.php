@@ -19,6 +19,11 @@ else if (isset($_SESSION['log_id']) && isset($_GET['action']) && isset($_GET['im
 	$header = 'Location: ../gallery/controller.php?display=img&img_id='.$_GET['img_id'];
 	header ($header);
 }
+else if (isset($_SESSION['log_id']) && isset($_GET['action']) && isset($_GET['img_id']) && $_GET['action'] === 'remove')
+{
+	delete_img($_GET['img_id']);
+	header ('Location: ../gallery/controller.php');
+}
 else
 {
 	$elem_by_pg = 5;
