@@ -5,6 +5,8 @@
       canvas       = document.getElementById('canvas'),
       photo        = document.getElementById('photo'),
       startbutton  = document.getElementById('startbutton'),
+      glasses      = document.getElementById('glasses'),
+      add_glasses  = document.getElementById('add_glasses'),
       width = 320,
       height = 0;
 
@@ -40,6 +42,15 @@ if (navigator.getMedia)
       canvas.setAttribute('height', height);
       streaming = true;
     }
+  }, false);
+
+  add_glasses.addEventListener('click', function(ev){
+	var lol=glasses.className;
+	console.log(lol);
+	if (!lol)
+		glasses.className='hidden';
+	else
+		glasses.className='';
   }, false);
 
   function takepicture() {

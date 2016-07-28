@@ -7,18 +7,23 @@
 		<header style="text-align:center;">Img</header>
 		<div class="wrapper">
 			<article>
-		<video id="video"></video>
-		<canvas id="canvas"></canvas>
-		<img style="display:none;" id="photo" alt="photo">
-		<button id="glasses">Glasses</button>
-		<button id="smoke">Smoke</button>
-		<button id="startbutton">Prendre une photo</button>
-		<form method="post" action="index.php" enctype="multipart/form-data">
-			<input type="file" name="upload">Choose a file to upload</input>
-			<input type="submit" value="submit">
-		</form>
+				<div id="webcam">
+					<video id="video"></video>
+					<canvas id="canvas"></canvas>
+					<img style="display:none;" id="photo" alt="photo">
+					<img id="glasses" src="glasses.png">
+					<button id="add_glasses">Glasses</button>
+					<button id="startbutton">Prendre une photo</button>
+				</div>
+				<div id="upload">
+					<form method="post" action="index.php" enctype="multipart/form-data">
+					<input type="file" name="upload">Upload</input></br>
+					<input type="submit" value="submit">
+					</form>
+				</div>
 			</article>
-			<aside>aside</aside>
+			<aside>
+			</aside>
 		</div>
 		<script src="webcam.js"></script>
 		<footer>footer</footer>
