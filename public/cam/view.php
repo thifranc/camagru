@@ -10,7 +10,7 @@
 				<div id="webcam">
 					<video id="video"></video>
 					<canvas id="canvas"></canvas>
-					<img style="display:none;" id="photo" alt="photo">
+					<img id="photo" alt="photo">
 					<img id="glasses" src="glasses.png">
 					<button id="add_glasses">Glasses</button>
 					<button id="startbutton">Prendre une photo</button>
