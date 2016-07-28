@@ -3,7 +3,7 @@
   var streaming = false,
       video        = document.getElementById('video'),
       canvas       = document.getElementById('canvas'),
-      photo        = document.getElementById('photo'),
+      photo    	   = document.getElementById('photo'),
       startbutton  = document.getElementById('startbutton'),
       glasses      = document.getElementById('glasses'),
       add_glasses  = document.getElementById('add_glasses'),
@@ -57,7 +57,7 @@ if (navigator.getMedia)
     canvas.width = width;
     canvas.height = height;
     canvas.getContext('2d').drawImage(video, 0, 0, width, height);
-    var data = canvas.toDataURL('image/png');
+	var data = canvas.toDataURL('image/png');
     photo.setAttribute('src', data);
   }
 
