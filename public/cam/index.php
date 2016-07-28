@@ -16,7 +16,7 @@ function connect()
 
 if (isset($_SESSION['log_id']))
 {
-	if (isset($_FILES['nik']['name']) && !empty($_FILES['nik']['name']))
+	if (isset($_FILES['upload']['name']) && !empty($_FILES['upload']['name']))
 	{
 		if (!file_exists("../../private/img/"))
 			mkdir("../../private/img");
@@ -27,7 +27,7 @@ if (isset($_SESSION['log_id']))
 			$query->bindParam(':user_id', $_SESSION['log_id']);
 			$query->bindParam(':link', $path);
 			$query->execute();
-			move_uploaded_file($_FILES['nik']['tmp_name'], $path);
+			move_uploaded_file($_FILES['upload']['tmp_name'], $path);
 		} catch (PDOException $e) {
 			echo 'Connection failed: ' . $e->getMessage();
 			return FALSE;

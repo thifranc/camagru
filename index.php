@@ -1,3 +1,7 @@
-<?PHP
-
-echo 'test pour voir comment mon link fonctionne';
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>cam</title>
+	</head>
+yo la famille
+</html>
