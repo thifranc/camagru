@@ -2,38 +2,23 @@
 
 session_start();
 
-function connect()
-{
-	try {
-		$bdd = new PDO('mysql:host=localhost;dbname=thug_cam', 'root', 'root');
-		$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		return ($bdd);
-	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
-		die();
-	}
-}
+require_once("model.php");
 
-if (isset($_SESSION['log_id']))
+if (!isset($_SESSION['log_id']))
+	header ("Location: ../home/controller.php");
+
+else if (isset($_SESSION['log_id']) && !isset($_FILES['upload']) && !isset($_GET['cam']))
+{
+	require_once('choose.php');
+}
+else
 {
 	if (isset($_FILES['upload']['name']) && !empty($_FILES['upload']['name']))
 	{
-		if (!file_exists("../../private/img/"))
-			mkdir("../../private/img");
-		try {
-			$bdd = connect();
-			$path = "../../private/img/" . uniqid() . ".png";
-			$query = $bdd->prepare('INSERT INTO img (user_id, link) VALUES( :user_id, :link )');
-			$query->bindParam(':user_id', $_SESSION['log_id']);
-			$query->bindParam(':link', $path);
-			$query->execute();
-			move_uploaded_file($_FILES['upload']['tmp_name'], $path);
-		} catch (PDOException $e) {
-			echo 'Connection failed: ' . $e->getMessage();
-			return FALSE;
-		}
+		$file = $_FILES['upload'];
+		upload_tmp($file);
+		require_once("view.php");
 	}
-	require_once("view.php");
+	else
+		require_once("view.php");
 }
-else
-	header ("Location: ../home/controller.php");

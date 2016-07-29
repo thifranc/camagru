@@ -8,13 +8,13 @@
 		<header style="text-align:center;">Img</header>
 		<div class="wrapper">
 			<article>
-				<img id="glasses" src="glasses.png">
-				<button id="add_glasses">Glasses</button>
-				<video id="video"></video>
-				<canvas id="canvas"></canvas>
-				<img id="photo" class="hidden">
-				<button id="startbutton">Prendre une photo</button>
-				<script src="webcam.js"></script>
+				<a href="index.php?cam=on">get_cam</a>
+				<div id="upload">
+					<form method="post" action="index.php?cam=off" enctype="multipart/form-data">
+					<input type="file" name="upload">Upload</input></br>
+					<input type="submit" value="submit">
+					</form>
+				</div>
 			</article>
 			<aside>
 			</aside>
