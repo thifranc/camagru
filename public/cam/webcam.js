@@ -53,10 +53,10 @@ if (navigator.getMedia)
 		glasses.className='';
   }, false);
 
-  var canvas = document.getElementById('canvas');
-  var rect = canvas.getBoundingClientRect();
-  console.log(rect.top, rect.bottom, rect.right, rect.left);
-  var glasses = document.getElementById('glasses');
+//  var canvas = document.getElementById('canvas');
+//  var rect = canvas.getBoundingClientRect();
+//  console.log(rect.top, rect.bottom, rect.right, rect.left);
+//  var glasses = document.getElementById('glasses');
 
 
   function takepicture() {
