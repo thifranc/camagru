@@ -22,6 +22,19 @@
 			<aside>
 			</aside>
 		</div>
+<script>
+   var glasses      = document.getElementById('glasses');
+   var add_glasses  = document.getElementById('add_glasses');
+
+  add_glasses.addEventListener('click', function(ev){
+	var hidden=glasses.className;
+	console.log(hidden);
+	if (!hidden)
+		glasses.className='hidden';
+	else
+		glasses.className='';
+  }, false);
+</script>
 		<footer>footer</footer>
 	</body>
 </html>
