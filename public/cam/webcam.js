@@ -6,8 +6,23 @@ cover        = document.querySelector('#cover'),
 canvas       = document.querySelector('#canvas'),
 photo        = document.querySelector('#photo'),
 startbutton  = document.querySelector('#startbutton'),
+glasses	     = document.getElementById('glasses'),
 width = 320,
 height = 0;
+
+/*
+console.log(glasses.offsetWidth);
+console.log(glasses.offsetHeight);
+
+var rect = glasses.getBoundingClientRect();
+console.log(rect.top, rect.right, rect.bottom, rect.left);
+
+var rect = video.getBoundingClientRect();
+console.log(rect.top, rect.right, rect.bottom, rect.left);
+
+get info to pass to AJAX request
+
+*/
 
 navigator.getMedia = ( navigator.getUserMedia ||
 	navigator.webkitGetUserMedia ||
@@ -47,9 +62,9 @@ video.addEventListener('canplay', function(ev){
 function takepicture() {
 	canvas.width = width;
 	canvas.height = height;
+	canvas.className = 'hidden';
 	canvas.getContext('2d').drawImage(video, 0, 0, width, height);
-	var data = canvas.toDataURL('image/png');
-	photo.setAttribute('src', data);
+	//hide it
 
 
 	canvas.toBlob(function(blob) {

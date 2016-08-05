@@ -43,10 +43,10 @@
 function display_cam()
 {
 	echo '
-				<video id="video"></video>
+				<video id="video">
 				<canvas id="canvas"></canvas>
-				<img id="photo" class="hidden">
-				<button id="startbutton">Prendre une photo</button>
+				</video>
+				<button id="startbutton">Picture</button>
 				<script src="webcam.js"></script>
 		';
 }
