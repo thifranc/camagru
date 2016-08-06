@@ -28,6 +28,11 @@
 				</div>
 			</article>
 			<aside>
+				<?PHP
+					$last_img = last_img();
+					foreach ($last_img as $img)
+						echo '<div><img src=' . $img['link'] . '></div>';
+				?>
 			</aside>
 		</div>
 		<script src="glasses.js"></script>
@@ -36,6 +41,20 @@
 </html>
 
 <?PHP
+
+function last_img()
+{
+	try {
+		$bdd = connect();
+		$query = $bdd->prepare('SELECT link FROM img ORDER BY img_id DESC LIMIT 5');
+		$query->execute();
+		return ($query->fetchAll());
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage();
+		return FALSE;
+	}
+}
+
 function display_cam()
 {
 	echo '

@@ -8,10 +8,16 @@
 
 		<div class="wrapper">
 			<article>
+				<div>
 				<?PHP
 					display_page_img($img_data);
+				?>
+				</div>
+				<div>
+				<?PHP
 					display_page_number($sum_img, $elem_by_pg, $nb_page);
 				?>
+				</div>
 			</article>
 			<aside>aside</aside>
 		</div>
@@ -21,11 +27,6 @@
 </html>
 
 <?PHP
-
-//pour remove img : onclick : if SESSION(log_id) == imgclicked['user_id'] => then js remove 
-	//<div id=img_di>lololol</div>
-	//ducoup getelembyid => remove elem
-//les img seront ds des div, avec chacune une id correspondante a img_id (donc unique) donc removable facilement en js
 
 	function display_page_img($img_data)
 	{
@@ -45,4 +46,5 @@
 			$i++;
 		}
 	}
+
 ?>
