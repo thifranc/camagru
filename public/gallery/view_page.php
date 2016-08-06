@@ -31,7 +31,7 @@
 	{
 		foreach ($img_data as $img)
 		{
-			echo '<a href="controller.php?display=img&img_id='.$img['img_id'].'"><img src='.$img['link'].'></a>';
+			echo '<a href="controller.php?display=img&img_id='.$img['img_id'].'"><img src='. $img['link'] .'></a>';
 		}
 	}
 

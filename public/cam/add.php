@@ -1,4 +1,34 @@
 <?PHP
+
+session_start();
+
+function connect()
+{
+	try {
+		$bdd = new PDO('mysql:host=localhost;dbname=thug_cam', 'root', 'root');
+		$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		return ($bdd);
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage();
+		die();
+	}
+}
+
+function add_img($link)
+{
+	try {
+		$bdd = connect();
+		$query = $bdd->prepare('INSERT INTO img (user_id, link)
+			VALUES (:user_id, :link)');
+		$query->bindParam(':user_id', $_SESSION['log_id']);
+		$query->bindParam(':link', $link);
+		$query->execute();
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage();
+		return FALSE;
+	}
+}
+
 print_r($_POST);
 if ($_POST['type'] === 'camera')
 	$camera = imagecreatefrompng($_FILES['pictures']['tmp_name']);
@@ -14,6 +44,10 @@ if ($ret == false)
 	echo 'failed';
 else
 	echo 'success';
-imagepng($camera, "../../private/img/camera.png");
+$link = "../../private/img/" . uniqid() . ".png";
+
+imagepng($camera, $link);
+add_img($link);
+
 imagedestroy($camera);
 imagedestroy($glasses);
