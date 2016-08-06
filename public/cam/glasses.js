@@ -7,6 +7,7 @@
 			up				= document.getElementById('up'),
 			grow			= document.getElementById('grow'),
 			reduce			= document.getElementById('reduce');
+			startbutton		= document.getElementById('startbutton');
 
 down.addEventListener('click', function(){
 		var topVal = parseInt(glasses.style.top, 10);
@@ -45,13 +46,15 @@ reduce.addEventListener('click', function(){
 	console.log(hidden);
 	if (!hidden)
 	{
-		glasses.className='hidden';
-		display_glasses.className='hidden';
+		glasses.className = 'hidden';
+		display_glasses.className = 'hidden';
+		startbutton.className = 'hidden';
 	}
 	else
 	{
-		glasses.className='';
-		display_glasses.className='';
+		glasses.className = '';
+		display_glasses.className = '';
+		startbutton.className = '';
 	}
   }, false);
 
