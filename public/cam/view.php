@@ -48,7 +48,7 @@ function display_cam()
 function display_img()
 {
 	echo '
-		<img src="../../private/img/tmp_img.png">
+		<img src="tmp_img.png">
 		<button id="startbutton">Picture</button>
 		';
 }

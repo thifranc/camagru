@@ -26,8 +26,13 @@ else
 {
 	if (isset($_FILES['upload']['name']) && !empty($_FILES['upload']['name']))
 	{
-		//reduce or strech before moving or after
-		move_uploaded_file($_FILES['upload']['tmp_name'], "../../private/img/tmp_img.png");
+		$filename = $_FILES['upload']['tmp_name'];
+		list($width, $height) = getimagesize($filename);
+		$thumb = imagecreatetruecolor(300, 150);
+		$source = imagecreatefrompng($filename);
+		imagecopyresized($thumb, $source, 0, 0, 0, 0, 300, 150, $width, $height);
+		imagepng($thumb, 'tmp_img.png');
+		imagedestroy($thumb);
 	}
 	require_once("view.php");
 }
