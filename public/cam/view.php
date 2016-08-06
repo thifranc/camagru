@@ -39,11 +39,11 @@
 function display_cam()
 {
 	echo '
-				<video id="video">
-				<canvas id="canvas"></canvas>
-				</video>
-				<button id="startbutton">Picture</button>
-				<script src="webcam.js"></script>
+		<video id="video">
+		<canvas id="canvas"></canvas>
+		</video>
+		<button id="startbutton">Picture</button>
+		<script src="webcam.js"></script>
 		';
 }
 
@@ -52,6 +52,7 @@ function display_img()
 	echo '
 		<img src="tmp_img.png">
 		<button id="startbutton">Picture</button>
+		<script src="upload.js"></script>
 		';
 }
 ?>

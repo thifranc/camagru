@@ -1,7 +1,9 @@
 <?PHP
 print_r($_POST);
-move_uploaded_file($_FILES['pictures']['tmp_name'], "../../private/img/camera.png");
-$camera = imagecreatefrompng("../../private/img/camera.png");
+if ($_POST['type'] === 'camera')
+	$camera = imagecreatefrompng($_FILES['pictures']['tmp_name']);
+else
+	$camera = imagecreatefrompng('tmp_img.png');
 $glasses = imagecreatefrompng("glasses.png");
 
 imagealphablending($camera, true);

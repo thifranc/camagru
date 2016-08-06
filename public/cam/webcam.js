@@ -58,6 +58,7 @@ function takepicture() {
 		var formData = new FormData();
 		console.log('bonjour');
 		formData.append('pictures', blob);
+		formData.append('type', 'camera');
 		formData.append('width', glasses.offsetWidth);
 		formData.append('height', glasses.offsetHeight);
 		formData.append('top', parseInt(glasses.style.top, 10));
@@ -70,7 +71,6 @@ function takepicture() {
 	{
 		var ret = sender.responseText;
 		console.log(ret);
-		console.log('lol');
 	}
 		}
 	});
