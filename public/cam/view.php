@@ -7,10 +7,11 @@
 	<body>
 		<header style="text-align:center;">Img</header>
 		<div class="wrapper">
-			<article>
+			<article style="position:relative">
 				<button id="add_glasses">Glasses</button>
+				<button id="down">Down</button>
 				<div id="draw" style="position:relative;">
-				<img id="glasses" src="glasses.png" style="position:absolute">
+				<img id="glasses" src="glasses.png" style="position:absolute; top:0; left:0">
 				<?PHP
 					if ($_GET['cam'] === 'on')
 						display_cam();

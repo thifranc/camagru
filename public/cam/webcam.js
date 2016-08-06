@@ -7,22 +7,21 @@ canvas       = document.querySelector('#canvas'),
 photo        = document.querySelector('#photo'),
 startbutton  = document.querySelector('#startbutton'),
 glasses	     = document.getElementById('glasses'),
+down	     = document.getElementById('down'),
 width = 320,
 height = 0;
 
-/*
+down.addEventListener('click', function(){
+		var topVal = parseInt(glasses.style.top, 10);
+		glasses.style.top = (topVal + 3) + "px";
+		//var rect = glasses.getBoundingClientRect();
+		//console.log(rect.top, rect.right, rect.bottom, rect.left);
+
+});
 console.log(glasses.offsetWidth);
 console.log(glasses.offsetHeight);
-
-var rect = glasses.getBoundingClientRect();
-console.log(rect.top, rect.right, rect.bottom, rect.left);
-
-var rect = video.getBoundingClientRect();
-console.log(rect.top, rect.right, rect.bottom, rect.left);
-
-get info to pass to AJAX request
-
-*/
+console.log(video.offsetWidth);
+console.log(video.offsetHeight);
 
 navigator.getMedia = ( navigator.getUserMedia ||
 	navigator.webkitGetUserMedia ||
@@ -64,7 +63,6 @@ function takepicture() {
 	canvas.height = height;
 	canvas.className = 'hidden';
 	canvas.getContext('2d').drawImage(video, 0, 0, width, height);
-	//hide it
 
 
 	canvas.toBlob(function(blob) {
@@ -89,5 +87,6 @@ startbutton.addEventListener('click', function(ev){
 	takepicture();
 	ev.preventDefault();
 }, false);
+
 
 })();

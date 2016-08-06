@@ -1,5 +1,5 @@
 <?PHP
-
+print_r($_POST);
 move_uploaded_file($_FILES['pictures']['tmp_name'], "../../private/img/camera.png");
 $main_photo = imagecreatefrompng("../../private/img/camera.png");
 $sub_photo = imagecreatefrompng("glasses.png");
