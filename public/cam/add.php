@@ -1,14 +1,17 @@
 <?PHP
 print_r($_POST);
 move_uploaded_file($_FILES['pictures']['tmp_name'], "../../private/img/camera.png");
-$main_photo = imagecreatefrompng("../../private/img/camera.png");
-$sub_photo = imagecreatefrompng("glasses.png");
+$camera = imagecreatefrompng("../../private/img/camera.png");
+$glasses = imagecreatefrompng("glasses.png");
 
-$ret = imagecopymerge($main_photo, $sub_photo, 0, 0, 500, 500, 1000, 1000, 100);
+imagealphablending($camera, true);
+imagesavealpha($camera, true);
+
+$ret = imagecopyresampled($camera, $glasses, $_POST['left'], $_POST['top'], 0, 0, $_POST['width'], $_POST['height'], 2000, 2000);
 if ($ret == false)
 	echo 'failed';
 else
 	echo 'success';
-imagepng($main_photo, "../../private/img/camera.png");
-imagedestroy($main_photo);
-imagedestroy($sub_photo);
+imagepng($camera, "../../private/img/camera.png");
+imagedestroy($camera);
+imagedestroy($glasses);

@@ -9,7 +9,12 @@
 		<div class="wrapper">
 			<article style="position:relative">
 				<button id="add_glasses">Glasses</button>
+			<div id="display_glasses">
 				<button id="down">Down</button>
+				<button id="left">Left</button>
+				<button id="right">right</button>
+				<button id="up">up</button>
+			</div>
 				<div id="draw" style="position:relative;">
 				<img id="glasses" src="glasses.png" style="position:absolute; top:0; left:0">
 				<?PHP
@@ -24,16 +29,22 @@
 			</aside>
 		</div>
 <script>
-   var glasses      = document.getElementById('glasses');
    var add_glasses  = document.getElementById('add_glasses');
+   var display_glasses  = document.getElementById('display_glasses');
 
   add_glasses.addEventListener('click', function(ev){
-	var hidden=glasses.className;
+	var hidden = glasses.className;
 	console.log(hidden);
 	if (!hidden)
+	{
 		glasses.className='hidden';
+		display_glasses.className='hidden';
+	}
 	else
+	{
 		glasses.className='';
+		display_glasses.className='';
+	}
   }, false);
 </script>
 		<footer>footer</footer>

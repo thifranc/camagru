@@ -8,15 +8,31 @@ photo        = document.querySelector('#photo'),
 startbutton  = document.querySelector('#startbutton'),
 glasses	     = document.getElementById('glasses'),
 down	     = document.getElementById('down'),
+left	     = document.getElementById('left'),
+right	     = document.getElementById('right'),
+up   	     = document.getElementById('up'),
 width = 320,
 height = 0;
 
 down.addEventListener('click', function(){
 		var topVal = parseInt(glasses.style.top, 10);
 		glasses.style.top = (topVal + 3) + "px";
-		//var rect = glasses.getBoundingClientRect();
-		//console.log(rect.top, rect.right, rect.bottom, rect.left);
-
+		console.log(glasses.style.top);
+});
+up.addEventListener('click', function(){
+		var topVal = parseInt(glasses.style.top, 10);
+		glasses.style.top = (topVal - 3) + "px";
+		console.log(glasses.style.top);
+});
+left.addEventListener('click', function(){
+		var topVal = parseInt(glasses.style.left, 10);
+		glasses.style.left = (topVal - 3) + "px";
+		console.log(glasses.style.left);
+});
+right.addEventListener('click', function(){
+		var topVal = parseInt(glasses.style.left, 10);
+		glasses.style.left = (topVal + 3) + "px";
+		console.log(glasses.style.left);
 });
 console.log(glasses.offsetWidth);
 console.log(glasses.offsetHeight);
@@ -69,6 +85,10 @@ function takepicture() {
 		var formData = new FormData();
 		console.log('bonjour');
 		formData.append('pictures', blob);
+		formData.append('width', glasses.offsetWidth + 5);
+		formData.append('height', glasses.offsetHeight + 2);
+		formData.append('top', parseInt(glasses.style.top, 10));
+		formData.append('left', parseInt(glasses.style.left, 10));
 		var sender = new XMLHttpRequest();
 		sender.open("POST", "add.php", true);
 		sender.send(formData);
