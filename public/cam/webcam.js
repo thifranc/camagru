@@ -7,33 +7,9 @@ canvas       = document.querySelector('#canvas'),
 photo        = document.querySelector('#photo'),
 startbutton  = document.querySelector('#startbutton'),
 glasses	     = document.getElementById('glasses'),
-down	     = document.getElementById('down'),
-left	     = document.getElementById('left'),
-right	     = document.getElementById('right'),
-up   	     = document.getElementById('up'),
 width = 320,
 height = 0;
 
-down.addEventListener('click', function(){
-		var topVal = parseInt(glasses.style.top, 10);
-		glasses.style.top = (topVal + 3) + "px";
-		console.log(glasses.style.top);
-});
-up.addEventListener('click', function(){
-		var topVal = parseInt(glasses.style.top, 10);
-		glasses.style.top = (topVal - 3) + "px";
-		console.log(glasses.style.top);
-});
-left.addEventListener('click', function(){
-		var topVal = parseInt(glasses.style.left, 10);
-		glasses.style.left = (topVal - 3) + "px";
-		console.log(glasses.style.left);
-});
-right.addEventListener('click', function(){
-		var topVal = parseInt(glasses.style.left, 10);
-		glasses.style.left = (topVal + 3) + "px";
-		console.log(glasses.style.left);
-});
 console.log(glasses.offsetWidth);
 console.log(glasses.offsetHeight);
 console.log(video.offsetWidth);
@@ -45,10 +21,7 @@ navigator.getMedia = ( navigator.getUserMedia ||
 	navigator.msGetUserMedia);
 
 navigator.getMedia(
-	{
-		video: true,
-	audio: false
-	},
+	{video: true,audio: false},
 	function(stream) {
 		if (navigator.mozGetUserMedia) {
 			video.mozSrcObject = stream;
@@ -86,7 +59,7 @@ function takepicture() {
 		console.log('bonjour');
 		formData.append('pictures', blob);
 		formData.append('width', glasses.offsetWidth + 5);
-		formData.append('height', glasses.offsetHeight + 2);
+		formData.append('height', glasses.offsetHeight + 32); //random 32 to add ???
 		formData.append('top', parseInt(glasses.style.top, 10));
 		formData.append('left', parseInt(glasses.style.left, 10));
 		var sender = new XMLHttpRequest();

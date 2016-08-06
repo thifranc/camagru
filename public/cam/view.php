@@ -16,7 +16,7 @@
 				<button id="up">up</button>
 			</div>
 				<div id="draw" style="position:relative;">
-				<img id="glasses" src="glasses.png" style="position:absolute; top:0; left:0">
+				<img id="glasses" src="glasses.png" style="position:absolute; top:0; left:0; width:10%">
 				<?PHP
 					if ($_GET['cam'] === 'on')
 						display_cam();
@@ -28,25 +28,7 @@
 			<aside>
 			</aside>
 		</div>
-<script>
-   var add_glasses  = document.getElementById('add_glasses');
-   var display_glasses  = document.getElementById('display_glasses');
-
-  add_glasses.addEventListener('click', function(ev){
-	var hidden = glasses.className;
-	console.log(hidden);
-	if (!hidden)
-	{
-		glasses.className='hidden';
-		display_glasses.className='hidden';
-	}
-	else
-	{
-		glasses.className='';
-		display_glasses.className='';
-	}
-  }, false);
-</script>
+		<script src="glasses.js"></script>
 		<footer>footer</footer>
 	</body>
 </html>
@@ -67,6 +49,7 @@ function display_img()
 {
 	echo '
 		<img src="../../private/img/tmp_img.png">
+		<button id="startbutton">Picture</button>
 		';
 }
 ?>
