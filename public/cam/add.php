@@ -7,7 +7,7 @@ $glasses = imagecreatefrompng("glasses.png");
 imagealphablending($camera, true);
 imagesavealpha($camera, true);
 
-$ret = imagecopyresampled($camera, $glasses, $_POST['left'], $_POST['top'], 0, 0, $_POST['width'], $_POST['height'], 2000, 2000);
+$ret = imagecopyresampled($camera, $glasses, $_POST['left'], $_POST['top'], 0, 0, $_POST['width'] * 1.0, $_POST['height'] * 1.8, 2000, 2000);
 if ($ret == false)
 	echo 'failed';
 else

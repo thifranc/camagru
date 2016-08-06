@@ -58,8 +58,8 @@ function takepicture() {
 		var formData = new FormData();
 		console.log('bonjour');
 		formData.append('pictures', blob);
-		formData.append('width', glasses.offsetWidth + 5);
-		formData.append('height', glasses.offsetHeight + 32); //random 32 to add ???
+		formData.append('width', glasses.offsetWidth);
+		formData.append('height', glasses.offsetHeight);
 		formData.append('top', parseInt(glasses.style.top, 10));
 		formData.append('left', parseInt(glasses.style.left, 10));
 		var sender = new XMLHttpRequest();

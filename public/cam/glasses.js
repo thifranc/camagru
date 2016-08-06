@@ -4,7 +4,9 @@
 			down			= document.getElementById('down'),
 			left			= document.getElementById('left'),
 			right			= document.getElementById('right'),
-			up				= document.getElementById('up');
+			up				= document.getElementById('up'),
+			grow			= document.getElementById('grow'),
+			reduce			= document.getElementById('reduce');
 
 down.addEventListener('click', function(){
 		var topVal = parseInt(glasses.style.top, 10);
@@ -25,6 +27,17 @@ right.addEventListener('click', function(){
 		var topVal = parseInt(glasses.style.left, 10);
 		glasses.style.left = (topVal + 3) + "px";
 		console.log(glasses.style.left);
+});
+grow.addEventListener('click', function(){
+		var topVal = parseInt(glasses.style.width, 10);
+		glasses.style.width = (topVal + 3) + "px";
+		console.log(glasses.style.width);
+		console.log(glasses.offsetWidth);
+});
+reduce.addEventListener('click', function(){
+		var topVal = parseInt(glasses.style.width, 10);
+		glasses.style.width = (topVal - 3) + "px";
+		console.log(glasses.style.width);
 });
 
   add_glasses.addEventListener('click', function(ev){

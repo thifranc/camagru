@@ -14,9 +14,11 @@
 				<button id="left">Left</button>
 				<button id="right">right</button>
 				<button id="up">up</button>
+				<button id="grow">grow</button>
+				<button id="reduce">reduce</button>
 			</div>
 				<div id="draw" style="position:relative;">
-				<img id="glasses" src="glasses.png" style="position:absolute; top:0; left:0; width:10%">
+				<img id="glasses" src="glasses.png" style="position:absolute; top:0; left:0; width:80px">
 				<?PHP
 					if ($_GET['cam'] === 'on')
 						display_cam();
