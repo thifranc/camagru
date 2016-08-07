@@ -93,6 +93,7 @@ function get_comm($img_id)
 function add_comm($img_id, $text)
 {
 	try {
+		$text = htmlentities($text);
 		$bdd = connect();
 		$query = $bdd->prepare('INSERT INTO comment (img_id, user_id, date, text)
 			VALUES (:img_id, :user_id, NOW(), :text)');
