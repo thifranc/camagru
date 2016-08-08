@@ -18,9 +18,6 @@
 					else
 					{
 						display_update();
-						echo '<form method="post" action="controller.php?action=logout">';
-						echo '<input type="submit" name="logout" value="Logout">';
-						echo '</form>';
 						echo '<a href=../cam>Go be a thug</a>';
 					}
 				?>
@@ -32,7 +29,11 @@
 		<footer>
 			<?PHP
 				if (isset($_SESSION['log_id']))
-					echo ('Passwrd');
+				{
+					echo '<form method="post" action="controller.php?action=logout">';
+					echo '<input type="submit" name="logout" value="Logout">';
+					echo '</form>';
+				}
 			?>
 		</footer>
 	</body>

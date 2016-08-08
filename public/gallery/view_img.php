@@ -26,7 +26,16 @@
 			<aside>aside</aside>
 		</div>
 
-		<footer>footer</footer>
+		<footer>
+			<?PHP
+				if (isset($_SESSION['log_id']))
+				{
+					echo '<form method="post" action="../home/controller.php?action=logout">';
+					echo '<input type="submit" name="logout" value="Logout">';
+					echo '</form>';
+				}
+			?>
+		</footer>
 
 	</body>
 </html>
