@@ -3,7 +3,6 @@
 function merge_images() {
 
 		var formData = new FormData();
-		console.log('bonjour');
 		formData.append('type', 'upload');
 		formData.append('width', glasses.offsetWidth);
 		formData.append('height', glasses.offsetHeight);
@@ -16,7 +15,6 @@ function merge_images() {
 			if (sender.status >= 200 && sender.status <= 400)
 	{
 		var ret = sender.responseText;
-		console.log(ret);
 	}
 		}
 }

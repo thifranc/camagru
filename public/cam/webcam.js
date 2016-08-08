@@ -10,11 +10,6 @@ glasses	     = document.getElementById('glasses'),
 width = 320,
 height = 0;
 
-console.log(glasses.offsetWidth);
-console.log(glasses.offsetHeight);
-console.log(video.offsetWidth);
-console.log(video.offsetHeight);
-
 navigator.getMedia = ( navigator.getUserMedia ||
 	navigator.webkitGetUserMedia ||
 	navigator.mozGetUserMedia ||
@@ -56,7 +51,6 @@ function takepicture() {
 
 	canvas.toBlob(function(blob) {
 		var formData = new FormData();
-		console.log('bonjour');
 		formData.append('pictures', blob);
 		formData.append('type', 'camera');
 		formData.append('width', glasses.offsetWidth);

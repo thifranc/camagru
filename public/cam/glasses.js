@@ -12,38 +12,30 @@
 down.addEventListener('click', function(){
 		var topVal = parseInt(glasses.style.top, 10);
 		glasses.style.top = (topVal + 3) + "px";
-		console.log(glasses.style.top);
 });
 up.addEventListener('click', function(){
 		var topVal = parseInt(glasses.style.top, 10);
 		glasses.style.top = (topVal - 3) + "px";
-		console.log(glasses.style.top);
 });
 left.addEventListener('click', function(){
 		var topVal = parseInt(glasses.style.left, 10);
 		glasses.style.left = (topVal - 3) + "px";
-		console.log(glasses.style.left);
 });
 right.addEventListener('click', function(){
 		var topVal = parseInt(glasses.style.left, 10);
 		glasses.style.left = (topVal + 3) + "px";
-		console.log(glasses.style.left);
 });
 grow.addEventListener('click', function(){
 		var topVal = parseInt(glasses.style.width, 10);
 		glasses.style.width = (topVal + 3) + "px";
-		console.log(glasses.style.width);
-		console.log(glasses.offsetWidth);
 });
 reduce.addEventListener('click', function(){
 		var topVal = parseInt(glasses.style.width, 10);
 		glasses.style.width = (topVal - 3) + "px";
-		console.log(glasses.style.width);
 });
 
   add_glasses.addEventListener('click', function(ev){
 	var hidden = glasses.className;
-	console.log(hidden);
 	if (!hidden)
 	{
 		glasses.className = 'hidden';

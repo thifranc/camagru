@@ -29,7 +29,6 @@ function add_img($link)
 	}
 }
 
-print_r($_POST);
 if ($_POST['type'] === 'camera')
 	$camera = imagecreatefrompng($_FILES['pictures']['tmp_name']);
 else
