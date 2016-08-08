@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>cam</title>
-	</head>
-yo la famille
-</html>
+<?PHP
+header('Location: public/home/controller.php');
+?>

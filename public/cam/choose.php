@@ -8,9 +8,9 @@
 		<header style="text-align:center;">Img</header>
 		<div class="wrapper">
 			<article>
-				<a href="index.php?cam=on">get_cam</a>
+				<a href="controller.php?cam=on">get_cam</a>
 				<div id="upload">
-					<form method="post" action="index.php?cam=off" enctype="multipart/form-data">
+					<form method="post" action="controller.php?cam=off" enctype="multipart/form-data">
 					<input type="file" name="upload">Upload</input></br>
 					<input type="submit" value="submit">
 					</form>

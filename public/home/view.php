@@ -18,7 +18,7 @@
 					else
 					{
 						display_update();
-						echo '<a href=../cam>Go be a thug</a>';
+						echo '<a href=../cam/controller.php>Go be a thug</a>';
 					}
 				?>
 			
