@@ -59,6 +59,23 @@ function get_owner($img_id)
 	}
 }
 
+function get_mail($login)
+{
+	try {
+		$bdd = connect();
+		$query = $bdd->prepare('SELECT mail FROM user WHERE login=:login LIMIT 1');
+		$query->bindParam(':login', $login);
+		$query->execute();
+		if ($query->rowCount() === 1)
+			return ($query->fetch()['mail']);
+		else
+			return FALSE;
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage();
+		return FALSE;
+	}
+}
+
 function get_login($user_id)
 {
 	try {

@@ -47,7 +47,6 @@ function display_comment($comment)
 			' . $comm['text'] . '<strong> by ' . $login . ' at ' .$comm['date']. '
 			</strong></div>';
 	}
-	//see comment in view_page.php on removing img
 }
 
 function insert_comm($img)

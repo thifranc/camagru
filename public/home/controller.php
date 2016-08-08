@@ -13,7 +13,9 @@ if (isset($_GET['action']))
 		if ($_GET['action'] === 'register'
 			&& isset($_POST['login']) && isset($_POST['passwd']) && isset($_POST['mail']))
 		{
-			if (filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL) && strlen($_POST['passwd']) >= 8)
+			if (filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)
+				&& strlen($_POST['passwd']) >= 8
+				&& ctype_alnum($_POST['login']) === TRUE)
 			{
 				$registered = register($_POST['login'], $_POST['passwd'], $_POST['mail']);
 				if ($registered === FALSE)
@@ -22,7 +24,7 @@ if (isset($_GET['action']))
 					echo 'A confirmation mail has been sent to you';
 			}
 			else
-				echo 'could not register, check your mail and passwd';
+				echo 'could not register, check your data';
 		}
 
 		if ($_GET['action'] === 'login'

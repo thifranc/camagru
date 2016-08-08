@@ -16,6 +16,8 @@ if (isset($_GET['display']) && $_GET['display'] === 'img' && isset($_GET['img_id
 else if (isset($_SESSION['log_id']) && isset($_GET['action']) && isset($_GET['img_id']) && $_GET['action'] === 'add_comm' && !empty($_POST['text']))
 {
 	add_comm($_GET['img_id'], $_POST['text']);
+	$owner = get_owner($_GET['img_id']);
+	mail(get_mail($owner), 'Comment added', 'Hi ! A comment has been added on one of your photo');
 	$header = 'Location: ../gallery/controller.php?display=img&img_id='.$_GET['img_id'];
 	header ($header);
 }

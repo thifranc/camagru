@@ -26,6 +26,8 @@ else
 {
 	if (isset($_FILES['upload']['name']) && !empty($_FILES['upload']['name']))
 	{
+		if(@imagecreatefrompng($_FILES['upload']['tmp_name']) === FALSE)
+			return (require_once('choose.php'));
 		$filename = $_FILES['upload']['tmp_name'];
 		list($width, $height) = getimagesize($filename);
 		$thumb = imagecreatetruecolor(300, 150);
