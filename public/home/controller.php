@@ -19,12 +19,12 @@ if (isset($_GET['action']))
 			{
 				$registered = register($_POST['login'], $_POST['passwd'], $_POST['mail']);
 				if ($registered === FALSE)
-					echo 'mail or login already used, please choose another one';
+					$msg = 'mail or login already used, please choose another one';
 				else
-					echo 'A confirmation mail has been sent to you';
+					$msg = 'A confirmation mail has been sent to you';
 			}
 			else
-				echo 'could not register, check your data';
+				$msg = 'could not register, check your data';
 		}
 
 		if ($_GET['action'] === 'login'
@@ -32,7 +32,7 @@ if (isset($_GET['action']))
 		{
 			$logged = login($_POST['log_login'], $_POST['log_passwd']);
 			if ($logged === FALSE)
-				echo 'ERROR in login';
+				$msg = 'ERROR in login';
 			else
 				$_SESSION['log_id'] = $logged;
 		}
@@ -42,9 +42,9 @@ if (isset($_GET['action']))
 		{
 			$confirmed = confirm($_GET['login'], $_GET['link']);
 			if ($confirmed === FALSE)
-				echo 'The confirmation failed';
+				$msg = 'The confirmation failed';
 			else
-				echo 'You created your account and confirmed it ! Congratulations !';
+				$msg = 'You created your account and confirmed it ! Congratulations !';
 		}
 
 		if ($_GET['action'] === 'forgot'
@@ -52,9 +52,9 @@ if (isset($_GET['action']))
 		{
 			$forgot = forgot_passwd($_POST['forgot_login']);
 			if ($forgot === FALSE)
-				echo 'The login is not correct';
+				$msg = 'The login is not correct';
 			else
-				echo 'An email has been sent to you to reset your password';
+				$msg = 'An email has been sent to you to reset your password';
 		}
 
 		if ($_GET['action'] === 'reset'
@@ -62,9 +62,9 @@ if (isset($_GET['action']))
 		{
 			$reset = reset_passwd($_GET['login'], $_GET['uniq']);
 			if ($reset === FALSE)
-				echo 'The password could not be reseted';
+				$msg = 'The password could not be reseted';
 			else
-				echo 'An email with your new password has been sent';
+				$msg = 'An email with your new password has been sent';
 		}
 	}
 	else
@@ -73,9 +73,9 @@ if (isset($_GET['action']))
 		{
 			$updated = update($_POST['login'], $_POST['old_passwd'], $_POST['new_passwd']);
 			if ($updated === FALSE)
-				echo 'Password could not be changed';
+				$msg = 'Password could not be changed';
 			else
-				echo 'Password changed with succes !';
+				$msg = 'Password changed with succes !';
 		}
 		else if ($_GET['action'] === 'logout')
 			$_SESSION = array();

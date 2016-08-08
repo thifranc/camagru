@@ -24,6 +24,8 @@
 						display_update();
 						echo '<a href=../cam/controller.php>Go be a thug</a>';
 					}
+					if (!empty($msg))
+						echo $msg;
 				?>
 			
 			</article>
@@ -48,7 +50,7 @@ function display_register()
 {
 	echo ('Register
 		<form method="post" action="controller.php?action=register">
-			Login : <input type="text" name="login">
+			Login (only letters or digits) : <input type="text" name="login">
 			Password (must be at least 8 characters long) : <input type="password" name="passwd">
 			Mail : <input type="text" name="mail">
 			<input type="submit" name="OK" value="OK">
