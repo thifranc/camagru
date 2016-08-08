@@ -12,6 +12,67 @@ function connect()
 	}
 }
 
+function get_likes($img_id)
+{
+	try {
+		$bdd = connect();
+		$query = $bdd->prepare('SELECT COUNT(*) as likes FROM likes WHERE img_id=:img_id');
+		$query->bindParam(':img_id', $img_id);
+		$query->execute();
+		return $query->fetch()['likes'];
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage();
+		return FALSE;
+	}
+}
+
+function liked($img_id, $user_id)
+{
+	try {
+		$bdd = connect();
+		$query = $bdd->prepare('SELECT * FROM likes WHERE img_id=:img_id AND user_id=:user_id');
+		$query->bindParam(':img_id', $img_id);
+		$query->bindParam(':user_id', $user_id);
+		$query->execute();
+		if (isset($query->fetch()['user_id']))
+			return TRUE;
+		else
+			return FALSE;
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage();
+		return FALSE;
+	}
+}
+
+function unlike($img_id, $user_id)
+{
+	try {
+		$bdd = connect();
+		$query = $bdd->prepare('DELETE FROM likes WHERE img_id=:img_id AND user_id=:user_id LIMIT 1');
+		$query->bindParam(':img_id', $img_id);
+		$query->bindParam(':user_id', $user_id);
+		$query->execute();
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage();
+		return FALSE;
+	}
+}
+
+function like($img_id, $user_id)
+{
+	try {
+		$bdd = connect();
+		$query = $bdd->prepare('INSERT INTO likes (img_id, user_id)
+			VALUES (:img_id, :user_id)');
+		$query->bindParam(':img_id', $img_id);
+		$query->bindParam(':user_id', $user_id);
+		$query->execute();
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage();
+		return FALSE;
+	}
+}
+
 function delete_img($img_id)
 {
 	try {

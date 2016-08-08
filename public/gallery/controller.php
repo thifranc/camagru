@@ -6,6 +6,21 @@ require_once("model.php");
 
 if (isset($_GET['display']) && $_GET['display'] === 'img' && isset($_GET['img_id']))
 {
+	if (isset($_SESSION['log_id']))
+	{
+		$liked = liked($_GET['img_id'], $_SESSION['log_id']);
+		if ($_GET['action'] === 'like' && $liked === FALSE)
+		{
+			like($_GET['img_id'], $_SESSION['log_id']);
+			$liked = TRUE;
+		}
+		else if ($_GET['action'] === 'unlike' && $liked === TRUE)
+		{
+			unlike($_GET['img_id'], $_SESSION['log_id']);
+			$liked = FALSE;
+		}
+	}
+	$likes = get_likes($_GET['img_id']);
 	$img = get_img($_GET['img_id']);
 	$owner = get_owner($_GET['img_id']);
 	if (empty($img) || empty($owner))

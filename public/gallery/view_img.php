@@ -8,14 +8,18 @@
 
 		<div class="wrapper">
 			<article>
-				<?PHP display_img($img, $owner);?>
-				<?PHP
+				<?PHP display_img($img, $owner);
 					display_comment($comment);
+					echo 'Likes = ' . $likes;
 					if (isset($_SESSION['log_id']))
 					{
 						insert_comm($img);
+						if ($liked === TRUE)
+							echo '<a href=controller.php?action=unlike&display=img&img_id='.$_GET['img_id'].'>unlike</a>';
+						else
+							echo '<a href=controller.php?action=like&display=img&img_id='.$_GET['img_id'].'>like</a>';
 						if ($_SESSION['log_id'] === $img['user_id'])
-							echo '<a href=controller.php?action=remove&img_id='.$img['img_id'].'>Delete this image</a>';
+							echo '</br><a href=controller.php?action=remove&img_id='.$img['img_id'].'>Delete this image</a>';
 					}
 				?>
 			</article>
