@@ -5,7 +5,11 @@
 		<title>Camagru</title>
 	</head>
 	<body>
-		<header style="text-align:center;">Img</header>
+		<header>
+			<div style="text-align:left;"><a href="../home/controller.php">HOME</a></div>
+			<div style="text-align:center;"><a href="../cam/controller.php">CAM</a></div>
+			<div style="text-align:right;"><a href="../gallery/controller.php">GALLERY</a></div>
+		</header>
 		<div class="wrapper">
 			<article>
 				<a href="controller.php?cam=on">get_cam</a>
@@ -16,8 +20,6 @@
 					</form>
 				</div>
 			</article>
-			<aside>
-			</aside>
 		</div>
 		<footer>
 			<?PHP

@@ -25,7 +25,8 @@ function register($login, $passwd, $mail)
 		$query->bindParam(':passwd', $passwd);
 		$query->bindParam(':mail', $mail);
 		$query->execute();
-		mail($mail, 'Confirm register', 'Click on this link to complete your registration : localhost:8080/public/home/controller.php?action=confirm&login='. $login.'&link='. substr($passwd, 0, 20) . PHP_EOL);
+		$link = 'localhost:8080/public/home/controller.php?action=confirm&login='. $login .'&link='. substr($passwd, 0, 20);
+		mail($mail, 'Confirm register', 'Click on this link to complete your registration : <a href="'.$link.'">link</a>  or copy this url : ' . $link, 'Content-type: text/html; charset=utf-8');
 	} catch (PDOException $e) {
 		echo 'Connection failed: ' . $e->getMessage();
 		return FALSE;
