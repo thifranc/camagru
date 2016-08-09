@@ -16,7 +16,8 @@ body {
 }
 
 .wrapper {
-  flex: 1 1 auto; /* occupe la hauteur restante */
+  flex-wrap: wrap;
+  flex: 1 1 auto;
   display: flex; /* crée un contexte flex pour ses enfants */
 }
 

@@ -108,7 +108,6 @@ function forgot_passwd($login)
 		$query->bindParam(':login', $login);
 		$query->execute();
 		$result = $query->fetch();
-		print_r($result);
 		if ($result !== FALSE)
 		{
 			$unique = uniqid();

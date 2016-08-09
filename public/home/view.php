@@ -50,9 +50,10 @@ function display_register()
 {
 	echo ('Register
 		<form method="post" action="controller.php?action=register">
-			Login (only letters or digits) : <input type="text" name="login">
-			Password (must be at least 8 characters long) : <input type="password" name="passwd">
-			Mail : <input type="text" name="mail">
+			Login : <input type="text" name="login"></br>
+			Password : <input type="password" name="passwd"></br>
+			Mail : <input type="text" name="mail"></br>
+			Info : Login: only letters or digits </br>Passowrd : at least 8 characters, one upper, one lower and one digit</br>
 			<input type="submit" name="OK" value="OK">
 		</form>
 		');
