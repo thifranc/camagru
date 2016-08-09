@@ -11,6 +11,8 @@ else if (isset($_SESSION['log_id']) && !isset($_GET['cam']))
 }
 else
 {
+	if (isset($_GET['cam']) && $_GET['cam'] === 'off' && empty($_FILES['upload']['name']))
+			return (require_once('choose.php'));
 	if (isset($_FILES['upload']['name']) && !empty($_FILES['upload']['name']))
 	{
 		if(@imagecreatefrompng($_FILES['upload']['tmp_name']) === FALSE)
