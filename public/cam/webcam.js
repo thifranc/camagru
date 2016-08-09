@@ -74,8 +74,9 @@ function takepicture() {
 		sender.onload = function () {
 			if (sender.status >= 200 && sender.status <= 400)
 	{
-		var ret = sender.responseText;
-		console.log(ret);
+//		var ret = sender.responseText;
+//		console.log(ret);
+		location.reload();
 	}
 		}
 	});

@@ -14,7 +14,7 @@ if (isset($_GET['action']))
 			&& isset($_POST['login']) && isset($_POST['passwd']) && isset($_POST['mail']))
 		{
 			if (filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)
-				&& strlen($_POST['passwd']) >= 8
+				&& preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/', $_POST['passwd'])
 				&& ctype_alnum($_POST['login']) === TRUE)
 			{
 				$registered = register($_POST['login'], $_POST['passwd'], $_POST['mail']);

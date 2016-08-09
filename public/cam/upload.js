@@ -14,7 +14,8 @@ function merge_images() {
 		sender.onload = function () {
 			if (sender.status >= 200 && sender.status <= 400)
 	{
-		var ret = sender.responseText;
+		//var ret = sender.responseText;
+		location.reload();
 	}
 		}
 }
