@@ -7,7 +7,7 @@ function connect()
 		$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		return ($bdd);
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = 'Connection failed: ' . $e->getMessage();
 		die();
 	}
 }
@@ -21,7 +21,7 @@ function get_likes($img_id)
 		$query->execute();
 		return $query->fetch()['likes'];
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = ' failed: ' . $e->getMessage();
 		return FALSE;
 	}
 }
@@ -39,7 +39,7 @@ function liked($img_id, $user_id)
 		else
 			return FALSE;
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = ' failed: ' . $e->getMessage();
 		return FALSE;
 	}
 }
@@ -53,7 +53,7 @@ function unlike($img_id, $user_id)
 		$query->bindParam(':user_id', $user_id);
 		$query->execute();
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = ' failed: ' . $e->getMessage();
 		return FALSE;
 	}
 }
@@ -68,7 +68,7 @@ function like($img_id, $user_id)
 		$query->bindParam(':user_id', $user_id);
 		$query->execute();
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = ' failed: ' . $e->getMessage();
 		return FALSE;
 	}
 }
@@ -81,7 +81,7 @@ function delete_img($img_id)
 		$query->bindParam(':img_id', $img_id);
 		$query->execute();
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = ' failed: ' . $e->getMessage();
 		return FALSE;
 	}
 }
@@ -98,7 +98,7 @@ function get_img($img_id)
 		else
 			return FALSE;
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = ' failed: ' . $e->getMessage();
 		return FALSE;
 	}
 }
@@ -115,7 +115,7 @@ function get_owner($img_id)
 		else
 			return FALSE;
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = ' failed: ' . $e->getMessage();
 		return FALSE;
 	}
 }
@@ -132,7 +132,7 @@ function get_mail($login)
 		else
 			return FALSE;
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = ' failed: ' . $e->getMessage();
 		return FALSE;
 	}
 }
@@ -149,7 +149,7 @@ function get_login($user_id)
 		else
 			return FALSE;
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = ' failed: ' . $e->getMessage();
 		return FALSE;
 	}
 }
@@ -163,7 +163,7 @@ function get_comm($img_id)
 		$query->execute();
 		return ($query->fetchAll());
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = ' failed: ' . $e->getMessage();
 		return FALSE;
 	}
 }
@@ -180,7 +180,7 @@ function add_comm($img_id, $text)
 		$query->bindParam(':text', $text);
 		$query->execute();
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = ' failed: ' . $e->getMessage();
 		return FALSE;
 	}
 }
@@ -195,7 +195,7 @@ function get_page($page_num, $elem_by_pg)
 		$query->execute();
 		return $query->fetchAll();
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = ' failed: ' . $e->getMessage();
 		return FALSE;
 	}
 }
@@ -208,7 +208,7 @@ function sum_img()
 		$query->execute();
 		return $query->fetch()['sum'];
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = ' failed: ' . $e->getMessage();
 		return FALSE;
 	}
 }

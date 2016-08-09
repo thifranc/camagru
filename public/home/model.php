@@ -9,7 +9,7 @@ function connect()
 		$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		return ($bdd);
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = ' failed: ' . $e->getMessage();
 		die();
 	}
 }
@@ -28,7 +28,7 @@ function register($login, $passwd, $mail)
 		$link = 'localhost:8080/public/home/controller.php?action=confirm&login='. $login .'&link='. substr($passwd, 0, 20);
 		mail($mail, 'Confirm register', 'Click on this link to complete your registration : <a href="'.$link.'">link</a>  or copy this url : ' . $link, 'Content-type: text/html; charset=utf-8');
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = ' failed: ' . $e->getMessage();
 		return FALSE;
 	}
 }
@@ -47,7 +47,7 @@ function login($login, $passwd)
 		else
 			return FALSE;
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = ' failed: ' . $e->getMessage();
 		return FALSE;
 	}
 }
@@ -69,15 +69,13 @@ function confirm($login, $link)
 		else
 			return FALSE;
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = ' failed: ' . $e->getMessage();
 		return FALSE;
 	}
 }
 
 function update($login, $old_passwd, $new_passwd)
 {
-	if (strlen($new_passwd) < 8)
-		return FALSE;
 	try {
 		$bdd = connect();
 		$query = $bdd->prepare('SELECT * FROM user WHERE login=:login AND passwd=:old_passwd AND active=1 LIMIT 1');
@@ -95,7 +93,7 @@ function update($login, $old_passwd, $new_passwd)
 		else
 			return FALSE;
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = ' failed: ' . $e->getMessage();
 		return FALSE;
 	}
 }
@@ -120,7 +118,7 @@ function forgot_passwd($login)
 		else
 			return FALSE;
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = ' failed: ' . $e->getMessage();
 		return FALSE;
 	}
 }
@@ -145,7 +143,7 @@ function reset_passwd($login, $unique_id)
 		else
 			return FALSE;
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = ' failed: ' . $e->getMessage();
 		return FALSE;
 	}
 }

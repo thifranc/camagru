@@ -9,7 +9,7 @@ function connect()
 		$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		return ($bdd);
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = 'Connection failed: ' . $e->getMessage();
 		die();
 	}
 }
@@ -24,7 +24,7 @@ function add_img($link)
 		$query->bindParam(':link', $link);
 		$query->execute();
 	} catch (PDOException $e) {
-		echo 'Connection failed: ' . $e->getMessage();
+		$error_msg = 'Connection failed: ' . $e->getMessage();
 		return FALSE;
 	}
 }

@@ -4,8 +4,6 @@ session_start();
 
 require_once('model.php');
 
-//pour communiquer les retours de fonctions a la view, set des $var > return error, puis view les interpretera
-
 if (isset($_GET['action']))
 {
 	if (!isset($_SESSION['log_id']))
@@ -71,11 +69,16 @@ if (isset($_GET['action']))
 	{
 		if ($_GET['action'] === 'update' && isset($_POST['login']) && isset($_POST['old_passwd']) && isset($_POST['new_passwd']))
 		{
-			$updated = update($_POST['login'], $_POST['old_passwd'], $_POST['new_passwd']);
-			if ($updated === FALSE)
-				$msg = 'Password could not be changed';
+			if (preg_match('/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/', $_POST['new_passwd']))
+			{
+				$updated = update($_POST['login'], $_POST['old_passwd'], $_POST['new_passwd']);
+				if ($updated === FALSE)
+					$msg = 'Password could not be changed';
+				else
+					$msg = 'Password changed with succes !';
+			}
 			else
-				$msg = 'Password changed with succes !';
+				$msg = 'password too weak, at leat 8 characters, one upper, one lower and one digit';
 		}
 		else if ($_GET['action'] === 'logout')
 			$_SESSION = array();
