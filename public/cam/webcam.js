@@ -22,7 +22,7 @@ if (navigator.mediaDevices.getUserMedia)
 		navigator.mediaDevices.getUserMedia(constraints)
 			.then(function(stream) {
 			  var videoTracks = stream.getVideoTracks();
-			  window.stream = stream; // make variable available to browser console
+			  window.stream = stream;
 			  video.srcObject = stream;
 			})
 	video.play();
@@ -37,7 +37,7 @@ else
 				video.play();
 		},
 		function(err) {
-			console.log("An error occured! " + err);
+		//	console.log("error ! " + err);
 		}
 		);
 }

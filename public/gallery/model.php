@@ -140,7 +140,7 @@ function get_mail($login)
 function get_login($user_id)
 {
 	try {
-		$bdd = connect(); // don't forget to order by date (+ recent au + vieux)
+		$bdd = connect();
 		$query = $bdd->prepare('SELECT login FROM user WHERE user_id=:user_id LIMIT 1');
 		$query->bindParam(':user_id', $user_id);
 		$query->execute();
@@ -157,7 +157,7 @@ function get_login($user_id)
 function get_comm($img_id)
 {
 	try {
-		$bdd = connect(); // don't forget to order by date (+ recent au + vieux)
+		$bdd = connect();
 		$query = $bdd->prepare('SELECT text, comment.user_id, date FROM comment JOIN user ON comment.user_id=user.user_id WHERE img_id=:img_id ORDER by date');
 		$query->bindParam(':img_id', $img_id);
 		$query->execute();

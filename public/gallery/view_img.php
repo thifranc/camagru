@@ -52,7 +52,6 @@ function display_img($img, $owner)
 {
 	echo '<img src='.$img['link'].'></br>';
 	echo 'owner is : ' . $owner . PHP_EOL;
-	//display_like();
 }
 
 function display_comment($comment)
